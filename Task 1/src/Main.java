@@ -8,8 +8,10 @@ public class Main {
         while (true) {
             String name = inputBookName();
             int pageCount = inputPageCount();
+            double bookPrice = inputBookPrice();
             addBook(name);
             addBook(name, pageCount);
+            addBook(name, pageCount, bookPrice);
             //todo использовать новый метод тут
             printInfo();
         }
@@ -25,12 +27,25 @@ public class Main {
         return new Scanner(System.in).nextInt();
     }
 
+    private static double inputBookPrice() {
+        System.out.println("Введите цену книги:");
+        return new Scanner(System.in).nextDouble();
+    }
+
     public static void addBook(String bookName) {
-        addBook(bookName, 0);
+        resultString(bookName, 0, 0);
     }
 
     public static void addBook(String bookName, int pageCount) {
-        booksInfo = booksInfo + bookName + " - " + (pageCount > 0 ? pageCount : "N/A") + " стр.\n";
+        resultString(bookName, pageCount, 0);
+    }
+
+    public static void addBook(String bookName, int pageCount, double bookPrice) {
+        resultString(bookName, pageCount, bookPrice);
+    }
+
+    public static String resultString(String bookName, int pageCount, double bookPrice) {
+        return booksInfo = booksInfo + bookName + " - " + (pageCount > 0 ? pageCount : "N/A") + " стр. Цена: " + (bookPrice > 0 ? bookPrice : "не установлено") + "\n";
     }
 
     public static void printInfo() {
